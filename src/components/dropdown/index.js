@@ -624,11 +624,12 @@ export default class Dropdown extends PureComponent {
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
+      props.dropDownStyle
     ];
 
     return (
-      <DropdownItem index={index} {...props}>
-        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
+      <DropdownItem index={index} style={ ~selected ? selectedItemStyle : props.style } {...props}>
+        <Text style={[styles.item, itemTextStyle, textStyle, ~selected ? selectedItemTextStyle : {} ]} numberOfLines={1}>
           {title}
         </Text>
       </DropdownItem>
