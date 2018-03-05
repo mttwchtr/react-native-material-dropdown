@@ -577,6 +577,9 @@ export default class Dropdown extends PureComponent {
       selectedItemColor = textColor,
       disabledItemColor = baseColor,
       fontSize,
+      selectedItemStyle,
+      dropDownStyle,
+      selectedItemTextStyle,
       itemTextStyle,
       rippleOpacity,
       rippleDuration,
@@ -624,7 +627,7 @@ export default class Dropdown extends PureComponent {
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
-      props.dropDownStyle
+      dropDownStyle
     ];
 
     return (
