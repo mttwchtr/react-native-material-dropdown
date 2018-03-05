@@ -618,7 +618,12 @@ export default class Dropdown extends PureComponent {
           itemColor:
         selectedItemColor;
 
-    let textStyle = { color, fontSize };
+    let textStyle = [{ 
+      color, 
+      fontSize
+     },
+     (index === selected ? selectedItemTextStyle : {})
+    ];
 
     props.style = [
       style,
@@ -627,12 +632,13 @@ export default class Dropdown extends PureComponent {
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
-      dropDownStyle
+      dropDownStyle,
+      ( index === selected ? selectedItemStyle  : {})
     ];
 
     return (
-      <DropdownItem index={index} style={ ~selected ? selectedItemStyle : props.style } {...props}>
-        <Text style={[styles.item, itemTextStyle, textStyle, ~selected ? selectedItemTextStyle : {} ]} numberOfLines={1}>
+      <DropdownItem index={index} {...props}>
+        <Text style={[styles.item, itemTextStyle, textStyle ]} numberOfLines={1}>
           {title}
         </Text>
       </DropdownItem>
@@ -678,7 +684,7 @@ export default class Dropdown extends PureComponent {
     let tailItemCount = this.tailItemCount();
     let itemSize = this.itemSize();
 
-    let height = 2 * itemPadding + itemSize * visibleItemCount;
+    let height = 2 * itemPadding + itemSize * visibleItemCount - 18;
     let translateY = -itemPadding;
 
     if (null == dropdownPosition) {
