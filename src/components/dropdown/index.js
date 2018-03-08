@@ -638,7 +638,7 @@ export default class Dropdown extends PureComponent {
 
     return (
       <DropdownItem index={index} {...props}>
-        <Text style={[styles.item, itemTextStyle, textStyle ]} numberOfLines={1}>
+        <Text style={[styles.item, textStyle, itemTextStyle ]} numberOfLines={1}>
           {title}
         </Text>
       </DropdownItem>
@@ -648,7 +648,9 @@ export default class Dropdown extends PureComponent {
   render() {
     let {
       renderBase,
+      renderHeader,
       renderAccessory,
+      hasHeader,
       containerStyle,
       overlayStyle: overlayStyleOverrides,
       pickerStyle: pickerStyleOverrides,
@@ -684,7 +686,7 @@ export default class Dropdown extends PureComponent {
     let tailItemCount = this.tailItemCount();
     let itemSize = this.itemSize();
 
-    let height = 2 * itemPadding + itemSize * visibleItemCount - 18;
+    let height = 2 * itemPadding + itemSize * visibleItemCount + ( this.props.hasHeader ? 26 : -18 );
     let translateY = -itemPadding;
 
     if (null == dropdownPosition) {
@@ -759,6 +761,7 @@ export default class Dropdown extends PureComponent {
               <FlatList
                 ref={this.updateScrollRef}
                 data={data}
+                ListHeaderComponent={hasHeader ? renderHeader() : null}
                 style={styles.scroll}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
